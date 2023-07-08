@@ -7,34 +7,38 @@ public class GameGrid : MonoBehaviour
 
     private GameObject [] candies;
 
-    private GridItem [,] items;
+    private GridItem [,] itemsFirstGrid;
+    private GridItem [,] itemSecondGrid;
 
     private int x, y, i;
 
     [SerializeField] private int xSize, ySize;
     void Start()
     {
+        itemsFirstGrid = new GridItem [xSize, ySize];
+        itemSecondGrid = new GridItem [xSize, ySize];
         GetCandies();
-        FillGrid();
+        FillGrid(-7, itemsFirstGrid);
+        FillGrid(5, itemSecondGrid);
     }
 
-    void FillGrid()
+    void FillGrid(int startPoint, GridItem [,] grid)
     {
-        items = new GridItem [xSize, ySize];
-        for(x = 0; x < xSize; x++)
+        //grid = new GridItem [xSize, ySize];
+
+        for(x = startPoint; x < (xSize + startPoint); x++)
         {
             for(y = 0; y < ySize; y++)
             {
-                items[x, y] = InstantiateCandy(x, y);
+                grid[x - startPoint, y] = InstantiateCandy(x, y);
             }
         }
-
     }
 
     GridItem InstantiateCandy(int x, int y)
     {
-        GameObject randomCandie = candies[Random.Range(0, candies.Length)];
-        GridItem newCandy = ((GameObject) Instantiate(randomCandie, new Vector3(x, y), Quaternion.identity)).GetComponent<GridItem>();
+        GameObject randomCandy = candies[Random.Range(0, candies.Length)];
+        GridItem newCandy = ((GameObject) Instantiate(randomCandy, new Vector3(x, y), Quaternion.identity)).GetComponent<GridItem>();
         newCandy.OnItemPositionChanged(x, y);
         return newCandy;
     }

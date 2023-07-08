@@ -18,14 +18,12 @@ public class GameGrid : MonoBehaviour
         itemsFirstGrid = new GridItem [xSize, ySize];
         itemSecondGrid = new GridItem [xSize, ySize];
         GetCandies();
-        FillGrid(-7, itemsFirstGrid);
+        FillGrid(-9, itemsFirstGrid);
         FillGrid(5, itemSecondGrid);
     }
 
     void FillGrid(int startPoint, GridItem [,] grid)
     {
-        //grid = new GridItem [xSize, ySize];
-
         for(x = startPoint; x < (xSize + startPoint); x++)
         {
             for(y = 0; y < ySize; y++)

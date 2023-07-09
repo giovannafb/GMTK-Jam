@@ -2,17 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Orders : MonoBehaviour
+[CreateAssetMenu(fileName = "New Order", menuName = "Orders")]
+public class Orders : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+   public new string name;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public int foodID;
+
+    public int quantity;
+
+    public Sprite typeofFood;
 }

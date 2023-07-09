@@ -15,6 +15,7 @@ public class GameGriddddd : MonoBehaviour
 
 
     private int x, y, i;
+    private int matrizOffset = 5;
     public static int minItemsForMatch = 3;
 
     [SerializeField] private int xSize, ySize;
@@ -23,8 +24,8 @@ public class GameGriddddd : MonoBehaviour
         itemsFirstGrid = new GridItem[xSize, ySize];
         itemSecondGrid = new GridItem[xSize, ySize];
         GetCandies();
-        FillGrid(-7, itemsFirstGrid);
-        FillGrid(5, itemSecondGrid);
+        FillGrid(0, itemsFirstGrid);
+        FillGrid(matrizOffset, itemSecondGrid);
         GridItem.OnMouseOverItemEventHandler += OnMouseOverItem;
 
     }
@@ -37,13 +38,24 @@ public class GameGriddddd : MonoBehaviour
     {
         //grid = new GridItem [xSize, ySize];
 
-        for (x = startPoint; x < (xSize + startPoint); x++)
-        {
-            for (y = 0; y < ySize; y++)
-            {
-                grid[x - startPoint, y] = InstantiateCandy(x, y);
-            }
-        }
+        for (x = 0; x < xSize ; x++)
+          {
+             for (y = 0; y < ySize; y++)
+             {
+                grid[x, y] = InstantiateCandy(x, y);
+             }
+          }
+
+
+        //grid = new GridItem [xSize, ySize];
+
+        //for (x = startPoint; x < (xSize + startPoint); x++)
+        //   {
+        //      for (y = 0; y < ySize; y++)
+        //      {
+      //  grid[x - startPoint, y] = InstantiateCandy(x, y);
+      //      }
+     //   }
     }
 
     GridItem InstantiateCandy(int x, int y)
@@ -86,6 +98,7 @@ public class GameGriddddd : MonoBehaviour
         StartCoroutine(a.transform.Move(b.transform.position, movDuration));
         StartCoroutine(b.transform.Move(aPosition, movDuration));
         yield return new WaitForSeconds(movDuration);
+        Debug.Log(a.x + " " + a.y);
         if (itemsFirstGrid[a.x, a.y])
         {
             SwapIndices(a, b);

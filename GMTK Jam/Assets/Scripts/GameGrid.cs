@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class GameGrid : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class GameGrid : MonoBehaviour
     private GridItem [,] itemSecondGrid;
 
     private int x, y, i;
+
+    public static Action OnMatch;
 
     [SerializeField] private int xSize, ySize;
     void Start()
@@ -35,7 +38,7 @@ public class GameGrid : MonoBehaviour
 
     GridItem InstantiateCandy(int x, int y)
     {
-        GameObject randomCandy = candies[Random.Range(0, candies.Length)];
+        GameObject randomCandy = candies[UnityEngine.Random.Range(0, candies.Length)];
         GridItem newCandy = ((GameObject) Instantiate(randomCandy, new Vector3(x, y), Quaternion.identity)).GetComponent<GridItem>();
         newCandy.OnItemPositionChanged(x, y);
         return newCandy;

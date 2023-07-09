@@ -6,18 +6,39 @@ using TMPro;
 
 public class OrderDisplay : MonoBehaviour
 {
-    public Order _order;
+    private Sprite [] snacks;
 
-    
-
-    [SerializeField] TextMeshProUGUI qtdFood;
+    public TextMeshProUGUI qtdFood;
 
     public Image foodImage;
 
+   /* void OnEnable()
+    {
+        GameGrid.OnMatch += GenerateSnacks;
+    }
+
+    void OnDisable()
+    {
+        GameGrid.OnMatch -= GenerateSnacks;
+    }*/
+
     void Start()
     {
+        GetSnacks();
         int _random = Random.Range(1,6);
-        foodImage.sprite = _order.Food;
+        foodImage.sprite = snacks[Random.Range(0, snacks.Length)];
+        qtdFood.text = _random.ToString();
+    }
+
+    void GetSnacks()
+    {
+        snacks = Resources.LoadAll<Sprite>("FoodSprites");
+    }
+
+    public void GenerateSnacks()
+    {
+        int _random = Random.Range(1,6);
+        foodImage.sprite = snacks[Random.Range(0, snacks.Length)];
         qtdFood.text = _random.ToString();
     }
 }
